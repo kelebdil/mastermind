@@ -8,7 +8,9 @@ from time import sleep
 # NB: pool should be initialized before importing
 # any of cocaine-framework-python modules to avoid
 # tornado ioloop dispatcher issues
-# import monitor_pool
+from mastermind_core.config import config
+if config.get('stat_source', 'native') != 'collector':
+    import monitor_pool
 
 from cocaine.worker import Worker
 
@@ -38,7 +40,6 @@ from planner import Planner
 from planner.move_planner import MovePlanner
 from manual_locks import manual_locker
 from namespaces import NamespacesSettings
-from mastermind_core.config import config
 from mastermind_core.meta_db import meta_db
 
 if config.get('stat_source', 'native') == 'collector':
